@@ -1,3 +1,5 @@
+// 手写函数柯里化——Curry
+
 const sum = (a, b, c) => {
   return a + b + c;
 }

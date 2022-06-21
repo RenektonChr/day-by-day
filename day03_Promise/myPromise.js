@@ -1,3 +1,5 @@
+// 手写Promise
+
 /**
  * Promise的三个状态
  * Pending：初始状态  当Promise被创建时，状态为Pending
