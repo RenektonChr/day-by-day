@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现一个可以拖拽的DIV</title>
+  <style>
+    #box{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px; 
+      height: 100px; 
+      background: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    function drag(dragDOM) {
+      dragDOM.onmousedown = function (e) {
+        e = e || window.event;
+        let diffX = e.clientX - dragDOM.offsetLeft;
+        let diffY = e.clientY - dragDOM.offsetTop;
+        let isDrag = true;
+        document.onmousemove = function (e) {
+          e = e || window.event;
+          if (isDrag) {
+            let left = e.clientX - diffX;
+            let top = e.clientY - diffY;
+            if (left < 0) {
+              left = 0;
+            } else if (left > window.innerWidth - dragDOM.offsetWidth) {
+              left = window.innerWidth - dragDOM.offsetWidth;
+            }
+
+            if (top < 0) {
+              top = 0;
+            } else if (top > window.innerHeight - dragDOM.offsetHeight) {
+              top = window.innerHeight - dragDOM.offsetHeight;
+            }
+            dragDOM.style.left = left + 'px';
+            dragDOM.style.top = top + 'px';
+          }
+        }
+        document.onmouseup = function (e) {
+          isDrag = false;
+          this.onmousemove = null;
+          this.onmouseup = null;
+        }
+      }
+    }
+
+    const box = document.querySelector('#box');
+    drag(box);
+  </script>
+</body>
+</html>
