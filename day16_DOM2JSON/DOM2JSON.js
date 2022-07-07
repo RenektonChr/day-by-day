@@ -51,5 +51,3 @@ function dom2json(dom) {
 
 const nodeEl = document.getElementById('box');
 const result = dom2json(nodeEl);
-
-console.log(result);
